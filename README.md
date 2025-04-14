@@ -66,35 +66,69 @@ jupyter notebook notebooks/budworm_model_demo.ipynb
 
 ---
 
-## 📘 Model Descriptions
+## 📘 Explanation per Script
 
-### 🔹 `budworm_model.py`
-- Core logistic population growth with predation.
-- Based on classic spruce budworm dynamics.
+### Main Scripts — Used to produce the Figures in the Main Text
 
-### 🔹 `bifurcation_triple.py`
-- Sweeps over predator strength `B` to produce a bifurcation diagram.
-- Visualizes multiple equilibria and sudden jumps in population.
+These scripts reproduce the main figures in the manuscript (*Boot et al., 2025, under review*).
 
-### 🔹 `sigmoid_social_B.py`
-- Introduces social feedback: collective action influences predator effectiveness.
-- Predator strength `B` becomes a sigmoid function of budworm population.
+#### 🔹 `budworm_dynamics.R`
+- Demonstrates the basic dynamics of the Spruce Budworm Outbreak Model.
+- Reproduces **Figure 2**.
 
-### 🔹 `social_phenomena_sim.py`
-- A threshold model where behavior (e.g., protesting, belief adoption) spreads once a tipping point is reached.
+#### 🔹 `bifurcation_analysis.R`
+- Performs bifurcation analysis, identifying stable and unstable states.
+- Reproduces **Figure 3**.
 
-### 🔹 `vaping_and_smoking_sim.py`
-- A behavior switching model: users can transition between smoking, vaping, both, or neither.
-- Inspired by public health behavior models.
+#### 🔹 `example_stable_states.R` [STILL DO IN R]
+- Illustrates convergence to different stable states across the bifurcation diagram.
+- Reproduces **Figure 4**.
 
-### 🔹 `budworm.py`
-- 
-- 
+#### 🔹 `multiple_stable_states.R` [ADD RIGHT PANEL]
+- Simulates stable patterns of use and transitions to heavy use.
+- Reproduces **Figure 5**.
 
-### 🔹 `N_over_t_with_sens.py`
-- 
-- 
+#### 🔹 `relapse_quitting.R` [STILL DO IN R]
+- Models sudden quitting and relapse.
+- Reproduces **Figure 6**.
+
+#### 🔹 `sudden_epidemic.R`
+- Simulates sudden outbreaks of use via social influence.
+- Reproduces **Figure 7** and **Figure E1**.
+
+#### 🔹 `disruption_social_network.R` [Organize sim_data folder]
+- Simulates recovery via disruption of a harmful social environment.
+- Reproduces **Figure 8** and **Figure F1**.
+
+#### 🔹 `illegal_legal.R`
+- Models clustering patterns among users of legal vs. illegal substances.
+- Reproduces **Figure 9**.
+
+#### 🔹 `vaping_smoking.R` [MAKE NEAT]
+- Extends the model to competitive/mutualistic substance relationships.
+- Reproduces **Figure 10**.
+
+#### 🔹 `social_hysteresis.R` [MAKE NEAT]
+- Demonstrates social hysteresis and irreversibility.
+- Reproduces **Figure 11**.
+
 ---
+
+### Helper Scripts — Called by Other Scripts
+
+These are utility or support scripts used internally by the main ones, but do not generate figures directly.
+
+*(Add scripts here as you identify them)*
+
+---
+
+### 📎 Supplementary Material Scripts
+
+These scripts reproduce figures in the Supplementary Materials of the manuscript.
+
+#### 🔹 `...` *(Add any relevant ones here once listed)*
+
+
 
 ## 🧪 Testing
 
