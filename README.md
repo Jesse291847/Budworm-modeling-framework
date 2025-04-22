@@ -5,7 +5,7 @@ The modeling framework integrates a dual-process model of addiction in an agent-
 
 ---
 
-## 📘 Explanation per Script [Missing scripts will be added in the week of 21st of april]
+## 📘 Explanation per Script
 
 ### Main Scripts — Used to produce the Figures in the Main Text
 
