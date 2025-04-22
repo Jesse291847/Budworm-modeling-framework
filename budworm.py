@@ -11,8 +11,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 try: set_mpl_settings()
 except ValueError: pass
-import matplotlib as mpl
+
 mpl.rc("figure", dpi=330) 
+
+import matplotlib as mpl
 
 import warnings
 # Ignore all warnings
@@ -80,42 +82,42 @@ def get_roots(func, ax, plotBool = True):
 #%%
 #%%
 
-############################################### ?INTERACTIVE #########################
-import numpy as np
-from matplotlib import pyplot as plt
-from ipywidgets import interactive, FloatSlider
-
-def budworm(r, K, A, B):
-    mu_max = 10
-    mu = np.linspace(0,mu_max,100)
-
-    fig, axs = plt.subplots(1)#, figsize = (16,12))
-    
-    
-    _mu = lambda _mu : r * _mu *(1-(_mu/K))
-    mulist = list(map(_mu,mu))
-    axs.plot(mu, mulist, label = 'Growth')
-    axs.set_xlabel('N')
-    axs.set_ylabel('dN')
-
-    pred = lambda p: (B*p**2) / (A**2 + p**2) #- C * p
-    predlist = list(map(pred,mu))
-    axs.plot(mu, predlist, label= 'Control', color = '#880D1E')
-
-    tot = lambda tot : _mu(tot) - pred(tot)  #r*_mu* (1-(_mu/K)) - (B* _mu**2/(A**2+_mu**2))
-    totlist = list(map(tot,mu))
-    axs.plot(mu, totlist, label = 'Nullcline', color = '#A663CC')
-    get_roots(tot, axs)
-    
-    axs.set_ylim((-0.5,2))
-    # axs.set_xlim((-0.5,2))
-    axs.axhline(0, linestyle = '--', color = '#1C110A', alpha = 0.5)
-    plt.legend()
-
-B_slider = FloatSlider(min=0.25, max=3, step=0.25, value=1.00)    
-A_slider = FloatSlider(min=0.25, max=3, step=0.25, value=1.00)   
-  
-interactive(budworm, r=(0.0,1,0.025), K = (0.0,25,1),  A = A_slider, B = B_slider) #, C = (0.0,0.5,0.01))
+# ############################################### ?INTERACTIVE #########################
+# import numpy as np
+# from matplotlib import pyplot as plt
+# from ipywidgets import interactive, FloatSlider
+# 
+# def budworm(r, K, A, B):
+#     mu_max = 10
+#     mu = np.linspace(0,mu_max,100)
+# 
+#     fig, axs = plt.subplots(1)#, figsize = (16,12))
+#     
+#     
+#     _mu = lambda _mu : r * _mu *(1-(_mu/K))
+#     mulist = list(map(_mu,mu))
+#     axs.plot(mu, mulist, label = 'Growth')
+#     axs.set_xlabel('N')
+#     axs.set_ylabel('dN')
+# 
+#     pred = lambda p: (B*p**2) / (A**2 + p**2) #- C * p
+#     predlist = list(map(pred,mu))
+#     axs.plot(mu, predlist, label= 'Control', color = '#880D1E')
+# 
+#     tot = lambda tot : _mu(tot) - pred(tot)  #r*_mu* (1-(_mu/K)) - (B* _mu**2/(A**2+_mu**2))
+#     totlist = list(map(tot,mu))
+#     axs.plot(mu, totlist, label = 'Nullcline', color = '#A663CC')
+#     get_roots(tot, axs)
+#     
+#     axs.set_ylim((-0.5,2))
+#     # axs.set_xlim((-0.5,2))
+#     axs.axhline(0, linestyle = '--', color = '#1C110A', alpha = 0.5)
+#     plt.legend()
+# 
+# B_slider = FloatSlider(min=0.25, max=3, step=0.25, value=1.00)    
+# A_slider = FloatSlider(min=0.25, max=3, step=0.25, value=1.00)   
+#   
+# interactive(budworm, r=(0.0,1,0.025), K = (0.0,25,1),  A = A_slider, B = B_slider) #, C = (0.0,0.5,0.01))
 
 #########################################################################
 #%%
@@ -252,7 +254,7 @@ growth_control_nullcline(r=0.8, B=1, A=1, K=10, initial_N=[0,2,4,6,8,10,12,14])
 
 
 #%%
-## GROWTH SYSTEM
+## FIGURE 2 GROWTH
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -292,27 +294,30 @@ for r in r_values:
     mu_list = [_mu(r, x, K) for x in N_range]
     
     # Plot growth rate versus N
-    axs[0].plot(N_range, mu_list, label=f'r={r}')
+    axs[1].plot(N_range, mu_list, label=f'r={r}')
     
     # Plot Cumulated Growth
-    axs[1].plot(time_values, N_values, label=f'r={r}')
+    axs[0].plot(time_values, N_values, label=f'r={r}')
 
 # Add dashed line and 'K' text to right plot (axs[1])
-axs[1].axhline(y=K, color = '#A663CC', linestyle='--')
-axs[1].text(time_values[1], K-0.5, 'K', color = '#A663CC', verticalalignment='center')
+axs[0].axhline(y=K, color = '#A663CC', linestyle='--')
+axs[0].text(time_values[1], K-0.5, 'K', color = '#A663CC', verticalalignment='center')
 
 # Set labels for left plot (axs[0])
-axs[0].set_xlabel('Consumption (N)')
-axs[0].set_ylabel('Increase in Consumption (dN)')
-axs[0].legend()
+axs[1].set_xlabel('Consumption (N)')
+axs[1].set_ylabel('Increase in Consumption (dN)')
+axs[1].legend()
 
 # Set labels for right plot (axs[1])
-axs[1].set_xlabel('Time (t)')
-axs[1].set_ylabel('Consumption (N)')
-axs[1].legend()
+axs[0].set_xlabel('Time (t)')
+axs[0].set_ylabel('Consumption (N)')
+axs[0].legend()
 
 # Adjust layout
 plt.tight_layout()
+
+
+plt.savefig("figures/fig2_N.pdf", format="pdf", bbox_inches="tight")
 
 # Display plot
 plt.show()
@@ -334,6 +339,7 @@ plt.show()
 #? dC over C, and C over time
 import matplotlib.pyplot as plt
 import numpy as np
+from init_rcParams import set_mpl_settings
 
 # Define parameters
 B_values = [1]  # List containing B value
@@ -357,7 +363,7 @@ for A in A_values:
     plist = list(map(pred, p))
     
     # Plot results on the left subplot
-    axs[0].plot(p, plist, label=f'Growth A={A}')
+    axs[1].plot(p, plist, label=f'Growth A={A}')
 
     # Initialize arrays to store time and P values
     time_values = np.arange(0, max_t, dt)
@@ -371,66 +377,121 @@ for A in A_values:
         P_values[i] = P_values[i-1] + pred(P_values[i-1]) * dt
     
     # Plot results on the right subplot
-    axs[1].plot(time_values, P_values, label=f'A={A}')
+    axs[0].plot(time_values, P_values, label=f'A={A}')
 
 # Add dashed line and 'B' text to left plot (axs[0])
-axs[0].axhline(y=B_values[0], color = '#A663CC', linestyle='--')
-axs[0].text(p[1], B_values[0]-0.05, 'B', color = '#A663CC', verticalalignment='center')
+axs[1].axhline(y=B_values[0], color = '#A663CC', linestyle='--')
+axs[1].text(p[1], B_values[0]-0.05, 'B', color = '#A663CC', verticalalignment='center')
 
 # Set labels for left plot (axs[0])
-axs[0].set_ylabel('Change of control (dC)')
-axs[0].set_xlabel('Consumption (N)')
-axs[0].legend()
+axs[1].set_ylabel('Control')
+axs[1].set_xlabel('Consumption (N)')
+axs[1].legend()
 
 # Set labels for right plot (axs[1])
-axs[1].set_xlabel('Time (t)')
-axs[1].set_ylabel('Control')
-axs[1].legend()
+axs[0].set_xlabel('Time (t)')
+axs[0].set_ylabel('Control')
+axs[0].legend()
 
 plt.tight_layout()
 
+#plt.savefig("figures/fig2_C.pdf", format="pdf", bbox_inches="tight")
+
 # Display plot
 plt.show()
+# 
+# #%%%%
+# ##### GROWTH VS CONTROL
+# # ? Quiver plot
+# import numpy as np
+# import matplotlib.pyplot as plt
+# 
+# # Parameters
+# r = 0.5
+# K = 10
+# A = 1
+# B = 1
+# 
+# 
+# # System equations
+# dgrowth_dt = lambda N: r * N * (1-N/K)
+# dcontrol_dt = lambda N: (B*N**2) / (A **2 + N**2)
+# 
+# # Grid for plotting
+# N = np.linspace(0, 12, 13)
+# N1, N2 = np.meshgrid(N, N)
+# 
+# # Vector fields
+# U = dgrowth_dt(N1)
+# V = dcontrol_dt(N2)
+# 
+# # Quiver plot
+# plt.quiver(N1, N2, V, U, color='r')
+# plt.ylabel('Growth over time')
+# plt.xlabel('Control over time')
+# plt.title('Quiver Plot of the System')
+# plt.grid(True)
+# plt.show()
+# 
 
-#%%%%
-##### GROWTH VS CONTROL
-# ? Quiver plot
+
+
+
+
+
 import numpy as np
 import matplotlib.pyplot as plt
+from init_rcParams import set_mpl_settings
+import matplotlib as mpl
+try: set_mpl_settings()
+mpl.rc("figure", dpi=330) 
 
-# Parameters
-r = 0.5
+# Set up the figure with two subplots next to each other
+fig, axs = plt.subplots(1, 2, figsize=(12, 5))
+
+######## LEFT PLOT: Consumption over time ########
+r_values = [0.3, 0.45, 0.7]
 K = 10
-A = 1
+dt = 0.01
+max_t = 30
+time_values = np.arange(0, max_t, dt)
+
+def growth(r, x, K):
+    return r * x * (1 - (x / K))
+
+for r in r_values:
+    N_values = np.zeros_like(time_values)
+    N_values[0] = 0.1
+    for i in range(1, len(time_values)):
+        N_values[i] = N_values[i-1] + growth(r, N_values[i-1], K) * dt
+    axs[0].plot(time_values, N_values, label=f'r={r}')
+
+axs[0].axhline(y=K, color='#A663CC', linestyle='--')
+axs[0].text(time_values[1], K-0.5, 'K', color='#A663CC', va='center')
+axs[0].set_xlabel('Time (t)')
+axs[0].set_ylabel('Consumption (N)')
+axs[0].legend()
+axs[0].set_title('')
+
+######## RIGHT PLOT: Control as function of consumption ########
+A_values = [0.5, 1, 1.5]
 B = 1
+p = np.linspace(0, 5, 200)
 
+for A in A_values:
+    control = (B * p**2) / (A**2 + p**2)
+    axs[1].plot(p, control, label=f'A={A}')
 
-# System equations
-dgrowth_dt = lambda N: r * N * (1-N/K)
-dcontrol_dt = lambda N: (B*N**2) / (A **2 + N**2)
+axs[1].axhline(y=B, color='#A663CC', linestyle='--')
+axs[1].text(p[1], B-0.05, 'B', color='#A663CC', va='center')
+axs[1].set_xlabel('Consumption (N)')
+axs[1].set_ylabel('Control')
+axs[1].legend()
+axs[1].set_title('')
 
-# Grid for plotting
-N = np.linspace(0, 12, 13)
-N1, N2 = np.meshgrid(N, N)
-
-# Vector fields
-U = dgrowth_dt(N1)
-V = dcontrol_dt(N2)
-
-# Quiver plot
-plt.quiver(N1, N2, V, U, color='r')
-plt.ylabel('Growth over time')
-plt.xlabel('Control over time')
-plt.title('Quiver Plot of the System')
-plt.grid(True)
+plt.tight_layout()
+#plt.savefig("figures/fig2_C.pdf", format="pdf", bbox_inches="tight")
 plt.show()
-
-
-
-
-
-
-
 
 
 

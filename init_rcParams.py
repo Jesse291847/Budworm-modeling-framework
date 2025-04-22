@@ -47,16 +47,4 @@ def set_mpl_settings():
     #Set dpi to retina
     mpl.rc("figure", dpi=330) 
 
-    # Create Custom Cmap and store 
-    from matplotlib.colors import LinearSegmentedColormap
-    color_wheel =('#1C110A','#880D1E','#C18203','#A663CC','#BFDBF7')
-    custom_cmap = LinearSegmentedColormap.from_list('gold_black', color_wheel, N=300)
-    plt.register_cmap(cmap=custom_cmap)
 
-    # plt.register_cmap(cmap=LinearSegmentedColormap.from_list('gold_black', color_wheel, N=300))
-    # Invert the custom colormap and give it a new name
-    inverted_cmap = custom_cmap.reversed()
-    inverted_cmap.name = 'black_gold'
-
-    # Register the inverted colormap with the new name
-    plt.register_cmap(cmap=inverted_cmap)

@@ -50,11 +50,7 @@ kappa <- 0.3
 
 #states: things for which you want to follow the progression
 
-network <- matrix(sample(0:1, n*n, TRUE, prob = c(0.95, 0.05)), n,n)
-network[upper.tri(network)] <- t(network)[upper.tri(network)]
-diag(network) <- 0
-s <- state <- c(rep(0.0001, n) ,r_base , as.vector(network))
-names(s) <- names(state) <- c(rep("N", n), rep("r", n), rep("network", n*n))
+
 
 p <- parms <- c(k_base, b_base, a)
 names(p) <- names(parms) <- c(rep("k_base", n), rep("b_base", n), rep("a", n))
@@ -105,6 +101,8 @@ for(i in 1:ntime){
 
 #just some random layout that is the same for all networks
 av <- averageLayout(networks[1:30])
+
+matplot(rowSums(dat1 > 5))
 
 
 # pdf("epidemic_networks.pdf", width = 15, height = 5)
@@ -160,7 +158,6 @@ data <- run(tmax = ntime, after = "distance <- outer(state[which(names(state) ==
 
 dat1 <- data[,which(names(data) == "N")]
 
-matplot(dat1, type = "l")
 colors <- get_colors(dat1)
 networks  <- list()
 for(i in 1:ntime){
@@ -178,7 +175,8 @@ net_illegal <- qgraph(networks[[300]], color = colors[300,], esize = 0.5, title 
 
 saved_data <- list()
 for (i in 1:100) {
-#social network aids recovery settings
+
+  # social network aids recovery settings
 k_base <- runif(n, 1,5)
 beta <-  0.2
 kappa <- 0.2
