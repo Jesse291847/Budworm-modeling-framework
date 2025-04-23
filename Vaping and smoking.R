@@ -26,6 +26,7 @@ model <- smoking
 state <- s <- c(S = 0.1, r = 1.2)
 parms <- p <- c(k = 10, b_S = 2.1, decay_r = 2, growth_r = 1, a = 1.5)
 
+# left upper panel
 smoking_data <- run(tmax = 50, table = TRUE)
 
 
@@ -34,20 +35,23 @@ model <- vaping_smoking
 state <- s <- c(S = 0.1, V = 0.1, r = 1.2)
 parms <- p <- c(k = 10, b_S = 2.1, b_V = 2, decay_r = 2, growth_r = 1, a = 1.5)
 
+# right upper panel
 vape_save <- run(table = TRUE, tmax = 50)
 
 
-# vaping bad
+# Now a set of parameter for which smoking doesn't escalate without vapes
 model <- smoking
 state <- s <- c(S = 0.1, r = 1)
 parms <- c(k = 10, b_S = 2.4, decay_r = 2, growth_r = 1, a = 0.9)
 
+# left bottom panel
 no_smoke <- run(tmax = 100, table =TRUE)
 
 model <- vaping_smoking
 state <- s <- c(S = 0.1, V = 0.1, r = 1.2)
 parms <- p <- c(k = 10, b_S = 2, b_V = 1.5, decay_r = 2, growth_r = 1.4, a = 0.9)
 
+# vaping can lead to a transition from smoking (right bottom panel)
 vape_bad <- run(tmax = 100, after =  "if(t > 50 & t < 60) {state[\"V\"] <- 0.01}", table = TRUE)
 
 
