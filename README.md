@@ -65,14 +65,18 @@ These scripts reproduce the main figures in the manuscript (*Boot et al., 2025, 
 ### Supplementary Material Scripts
 These scripts reproduce figures and analyses in the appendicies of the manuscript.
 
-### Tutorial scripts — 
-These scripts contain miminimal running examples of our model not used in the manuscript.
+### Bonus scripts — Additional scripts that are not features in the manuscript 
+These scripts contain miminimal running examples of our model not used in the manuscript as well as a closer look at the A parameter.
 
 #### 🔹 `individual_tutorial.R`
 - Contains a tutorial on how to implement our model for one individual.
 
 #### 🔹 `social_tutorial.R`
 - Contains a minimal example that show how to implement our full modeling framework.
+
+#### 🔹 `what_is_a.R`
+- This script shows numerically that 0.57 * A (delay) is equal tot the consumption value where control increases the most
+
 ---
 
 ## 📜 License
