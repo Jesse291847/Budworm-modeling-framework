@@ -61,5 +61,9 @@ diag(network) <- 0
 s <- state <- c(rep(0.0001, n), r_base , as.vector(network))
 names(s) <- names(state) <- c(rep("N", n), rep("r", n), rep("network", n*n))
 
+# get parameters ready for Grind
+p <- parms <- c(k_base, b_base, a)
+names(p) <- names(parms) <- c(rep("k_base", n), rep("b_base", n), rep("a", n))
+
 
 
