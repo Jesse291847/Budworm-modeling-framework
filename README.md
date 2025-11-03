@@ -1,6 +1,6 @@
 # Budworm Addiction Modeling Framework
 
-This repository contains code to implement the modeling framework discussed in Boot et al. (2025, under review) and reproduce all simulations from the manuscript.
+This repository contains code to implement the modeling framework discussed in Boot et al. (2025, https://psycnet.apa.org/fulltext/2026-82185-001.html) and reproduce all simulations from the manuscript.
 The modeling framework integrates a dual-process model of addiction in an agent-based network model. 
 
 ---
